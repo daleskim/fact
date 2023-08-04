@@ -1,0 +1,38 @@
+# R Auxiliary Files
+*.RData
+*.Rproj
+*.Rhistory
+*.Rproj.user/
+
+# Latex Auxiliary Files
+*.bbl
+*.blg
+*.out
+*.toc
+*.snm
+*.nav
+*.log
+*.gz
+*.aux
+*.lof
+*.lot
+
+# VS Code
+*.vscode/
+*.code-workspace
+
+# PyCharm
+*venv/
+*.idea/
+
+# Jupiter Notebook
+*.ipynb
+*.html
+
+# Compiled Files
+*.o
+*.dll
+
+# Project Specific Preferences
+*.Rds
+.Rproj.user

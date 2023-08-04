@@ -1,0 +1,19 @@
+Package: fact
+Type: Package
+Title: Factor Analysis via Correlation Thresholding
+Version: 0.1.0
+Date: 2023-07-20
+Author: Dale S. Kim
+Maintainer: Dale S. Kim <daleskim@stat.ucla.edu>
+Description:
+  Implements a correlation thresholding algorithm to learn the structure of a
+  factor analysis model.
+License: GPL (>= 3)
+Imports: Rcpp (>= 1.0.10)
+LinkingTo: Rcpp, RcppArmadillo
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Encoding: UTF-8
