@@ -84,9 +84,10 @@ Rcpp::List ct_algorithm(
   const arma::uword m = pared_tau.n_elem;
   
   // II. CT Algorithm
-  Rcpp::List out(m);
+  Rcpp::List out(0);
   for(arma::uword i = 0; i < m; i++) {
-    out[i] = ct_structure(R, pared_tau(i), false);
+    arma::umat struc = ct_structure(R, pared_tau(i), false);
+    if(struc.n_cols > 0) out.insert(out.end(), struc);
   }
   
   // III. Return
