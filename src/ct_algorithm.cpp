@@ -84,14 +84,25 @@ Rcpp::List ct_algorithm(
   const arma::uword m = pared_tau.n_elem;
   
   // II. CT Algorithm
-  Rcpp::List out(0);
+  Rcpp::List out_list(0);
+  std::set<std::vector<int>> out_set;
   for(arma::uword i = 0; i < m; i++) {
     arma::umat struc = ct_structure(R, pared_tau(i), false);
-    if(struc.n_cols > 0) out.insert(out.end(), struc);
+    if(struc.n_cols > 0) {
+      const int n_test = out_set.size();
+      const std::string tau_name = std::to_string(pared_tau(i));
+      arma::umat struc_vec = struc;
+      struc_vec.resize(struc.n_rows * struc.n_cols, 1);
+      out_set.insert(
+        arma::conv_to<std::vector<int>>::from(struc_vec)
+      );
+      // A. Uniqueness Check
+      if(n_test != out_set.size()) out_list[tau_name] = struc;
+    }
   }
   
   // III. Return
-  return out;
+  return out_list;
   
 }
 
