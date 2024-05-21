@@ -12,6 +12,8 @@
 //'
 //' @param R; numeric matrix of correlations.
 //' @param tau; optional numeric vector of threshold \eqn{\tau} values.
+//' @param k; optional numeric scalar integer indicating minimum clique size
+//' to search for. Must be 2 or greater, default is 2.
 //' 
 //' @details If `tau` is not given, then a set is automatically generated as
 //' follows:
@@ -40,14 +42,18 @@
 // [[Rcpp::export]]
 Rcpp::List ct_algorithm(
     const arma::mat &R,
-    const Rcpp::Nullable<Rcpp::NumericVector> tau = R_NilValue
+    const Rcpp::Nullable<Rcpp::NumericVector> tau = R_NilValue,
+    const int k = 2
 ) {
   
   // I. Preliminaries
   // A. Check R
   input_check(R);
   
-  // B. Format Tau
+  // B. Check k
+  if(k < 2) throw std::runtime_error("k must be 2 or greater.");
+  
+  // C. Format Tau
   arma::vec tau_arma;
   
   // 1. Tau is Given
@@ -87,7 +93,7 @@ Rcpp::List ct_algorithm(
   Rcpp::List out_list(0);
   std::set<std::vector<int>> out_set;
   for(arma::uword i = 0; i < m; i++) {
-    arma::umat struc = ct_structure(R, pared_tau(i), false);
+    arma::umat struc = ct_structure(R, pared_tau(i), k, false);
     if(struc.n_cols > 0) {
       const int n_test = out_set.size();
       const std::string tau_name = std::to_string(pared_tau(i));

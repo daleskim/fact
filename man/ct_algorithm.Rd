@@ -7,6 +7,9 @@
 \item{R;}{numeric matrix of correlations.}
 
 \item{tau;}{optional numeric vector of threshold \eqn{\tau} values.}
+
+\item{k;}{optional numeric scalar integer indicating minimum clique size
+to search for. Must be 2 or greater, default is 2.}
 }
 \value{
 \code{list} of \verb{numeric matrix}; each contains the support of the

@@ -8,6 +8,9 @@
 
 \item{tau;}{numeric scalar of threshold \eqn{\tau} value.}
 
+\item{k;}{optional numeric scalar integer indicating minimum clique size
+to search for. Must be 2 or greater, default is 2.}
+
 \item{check;}{optional logical scalar to indicate if \code{R} should be
 checked to be a valid input.}
 }

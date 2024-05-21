@@ -12,27 +12,29 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // ct_algorithm
-Rcpp::List ct_algorithm(const arma::mat& R, const Rcpp::Nullable<Rcpp::NumericVector> tau);
-RcppExport SEXP _fact_ct_algorithm(SEXP RSEXP, SEXP tauSEXP) {
+Rcpp::List ct_algorithm(const arma::mat& R, const Rcpp::Nullable<Rcpp::NumericVector> tau, const int k);
+RcppExport SEXP _fact_ct_algorithm(SEXP RSEXP, SEXP tauSEXP, SEXP kSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const arma::mat& >::type R(RSEXP);
     Rcpp::traits::input_parameter< const Rcpp::Nullable<Rcpp::NumericVector> >::type tau(tauSEXP);
-    rcpp_result_gen = Rcpp::wrap(ct_algorithm(R, tau));
+    Rcpp::traits::input_parameter< const int >::type k(kSEXP);
+    rcpp_result_gen = Rcpp::wrap(ct_algorithm(R, tau, k));
     return rcpp_result_gen;
 END_RCPP
 }
 // ct_structure
-arma::umat ct_structure(arma::mat const& R, double const& tau, bool const check);
-RcppExport SEXP _fact_ct_structure(SEXP RSEXP, SEXP tauSEXP, SEXP checkSEXP) {
+arma::umat ct_structure(arma::mat const& R, double const& tau, int const k, bool const check);
+RcppExport SEXP _fact_ct_structure(SEXP RSEXP, SEXP tauSEXP, SEXP kSEXP, SEXP checkSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< arma::mat const& >::type R(RSEXP);
     Rcpp::traits::input_parameter< double const& >::type tau(tauSEXP);
+    Rcpp::traits::input_parameter< int const >::type k(kSEXP);
     Rcpp::traits::input_parameter< bool const >::type check(checkSEXP);
-    rcpp_result_gen = Rcpp::wrap(ct_structure(R, tau, check));
+    rcpp_result_gen = Rcpp::wrap(ct_structure(R, tau, k, check));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -50,8 +52,8 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_fact_ct_algorithm", (DL_FUNC) &_fact_ct_algorithm, 2},
-    {"_fact_ct_structure", (DL_FUNC) &_fact_ct_structure, 3},
+    {"_fact_ct_algorithm", (DL_FUNC) &_fact_ct_algorithm, 3},
+    {"_fact_ct_structure", (DL_FUNC) &_fact_ct_structure, 4},
     {"_fact_pare_tau", (DL_FUNC) &_fact_pare_tau, 2},
     {NULL, NULL, 0}
 };

@@ -9,6 +9,8 @@
 #'
 #' @param R; numeric matrix of correlations.
 #' @param tau; optional numeric vector of threshold \eqn{\tau} values.
+#' @param k; optional numeric scalar integer indicating minimum clique size
+#' to search for. Must be 2 or greater, default is 2.
 #' 
 #' @details If `tau` is not given, then a set is automatically generated as
 #' follows:
@@ -35,8 +37,8 @@
 #' @export
 NULL
 
-ct_algorithm <- function(R, tau = NULL) {
-    .Call(`_fact_ct_algorithm`, R, tau)
+ct_algorithm <- function(R, tau = NULL, k = 2L) {
+    .Call(`_fact_ct_algorithm`, R, tau, k)
 }
 
 #' @name ct_structure
@@ -47,6 +49,8 @@ ct_algorithm <- function(R, tau = NULL) {
 #'
 #' @param R; numeric matrix of correlations.
 #' @param tau; numeric scalar of threshold \eqn{\tau} value.
+#' @param k; optional numeric scalar integer indicating minimum clique size
+#' to search for. Must be 2 or greater, default is 2.
 #' @param check; optional logical scalar to indicate if `R` should be
 #' checked to be a valid input.
 #' 
@@ -61,8 +65,8 @@ ct_algorithm <- function(R, tau = NULL) {
 #' @export
 NULL
 
-ct_structure <- function(R, tau, check = TRUE) {
-    .Call(`_fact_ct_structure`, R, tau, check)
+ct_structure <- function(R, tau, k = 2L, check = TRUE) {
+    .Call(`_fact_ct_structure`, R, tau, k, check)
 }
 
 #' @name pare_tau

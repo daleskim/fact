@@ -11,6 +11,8 @@
 //'
 //' @param R; numeric matrix of correlations.
 //' @param tau; numeric scalar of threshold \eqn{\tau} value.
+//' @param k; optional numeric scalar integer indicating minimum clique size
+//' to search for. Must be 2 or greater, default is 2.
 //' @param check; optional logical scalar to indicate if `R` should be
 //' checked to be a valid input.
 //' 
@@ -26,12 +28,18 @@
 
 // [[Rcpp::export]]
 arma::umat ct_structure(
-  arma::mat const &R, double const &tau, bool const check = true
+  arma::mat const &R,
+  double const &tau,
+  int const k = 2,
+  bool const check = true
 ) {
   
   // I. Preliminaries
   // A. Input Check
-  if(check) input_check(R);
+  if(check) {
+    input_check(R);
+    if(k < 2) throw std::runtime_error("k must be 2 or greater.");
+  }
   
   // B. Quantities
   const arma::uword p = R.n_rows;
@@ -47,7 +55,7 @@ arma::umat ct_structure(
     const arma::umat ne_i = E.submat(ne_ind, ne_ind);
     
     // B. Save Structure
-    if(arma::accu(ne_i) == ne_i.n_elem && arma::accu(ne_i) > 1) {
+    if(arma::accu(ne_i) == ne_i.n_elem && arma::accu(ne_i) >= std::pow(k, 2)) {
       arma::uvec struc_vec(p);
       struc_vec.elem(ne_ind) = arma::uvec(ne_ind.n_elem, arma::fill::ones);
       lambda_set.insert(arma::conv_to<std::vector<int>>::from(struc_vec));
