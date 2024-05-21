@@ -25,7 +25,7 @@ R
 
 # Run CT Algorithm (with specific thresholds)
 ct_algorithm(R, .2)
-[[1]]
+$`0.200000`
      [,1] [,2]
 [1,]    1    0
 [2,]    1    0
@@ -35,7 +35,7 @@ ct_algorithm(R, .2)
 
 # Run CT Algorithm (with automatic thresholds)
 ct_algorithm(R)
-[[1]]
+$`0.054000`
      [,1]
 [1,]    1
 [2,]    1
@@ -43,7 +43,7 @@ ct_algorithm(R)
 [4,]    1
 [5,]    1
 
-[[2]]
+$`0.234000`
      [,1] [,2]
 [1,]    1    0
 [2,]    1    0
@@ -51,7 +51,7 @@ ct_algorithm(R)
 [4,]    0    1
 [5,]    0    1
 
-[[3]]
+$`0.414000`
      [,1] [,2] [,3] [,4]
 [1,]    1    0    0    0
 [2,]    0    1    0    0
